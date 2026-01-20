@@ -106,7 +106,7 @@ const Header = () => {
                           transition={{ duration: 0.2 }}
                           className="absolute top-full left-1/2 -translate-x-1/2 pt-4"
                         >
-                          <div className="bg-card rounded-2xl shadow-xl border border-border p-6 grid grid-cols-3 gap-4 min-w-[700px]">
+                          <div className="bg-card rounded-2xl shadow-xl border border-border p-6 grid grid-cols-2 grid-rows-3 gap-4 min-w-[550px]">
                             {services.map((service) => (
                               <Link
                                 key={service.id}

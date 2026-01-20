@@ -13,6 +13,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { services } from "@/data/services";
 import logo from "@/assets/logo.jpeg";
+import ctaBackground from "@/assets/cta-background.jpg";
 
 const Footer = () => {
   const quickLinks = [
@@ -24,22 +25,35 @@ const Footer = () => {
 
   return (
     <footer className="bg-gradient-hero text-primary-foreground">
-      {/* CTA Section */}
+      {/* CTA Section with Background Image */}
       <div className="container mx-auto px-4 py-12">
-        <div className="bg-accent/20 backdrop-blur-sm rounded-2xl p-8 md:p-12 text-center">
-          <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">
-            Ready to Start Your Business Journey?
-          </h2>
-          <p className="text-primary-foreground/80 mb-8 max-w-2xl mx-auto">
-            Get expert guidance for all your business registration, tax, and compliance needs. 
-            Schedule a free consultation with our experienced chartered accountants.
-          </p>
-          <Link to="/contact">
-            <Button variant="hero" size="xl" className="group">
-              Schedule Free Consultation
-              <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
-            </Button>
-          </Link>
+        <div 
+          className="relative rounded-2xl p-8 md:p-12 text-center overflow-hidden"
+          style={{
+            backgroundImage: `url(${ctaBackground})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
+        >
+          {/* Overlay for better text readability */}
+          <div className="absolute inset-0 bg-primary/70 backdrop-blur-[2px]" />
+          
+          {/* Content */}
+          <div className="relative z-10">
+            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4 text-white">
+              Ready to Start Your Business Journey?
+            </h2>
+            <p className="text-white/90 mb-8 max-w-2xl mx-auto">
+              Get expert guidance for all your business registration, tax, and compliance needs. 
+              Schedule a free consultation with our experienced chartered accountants.
+            </p>
+            <Link to="/contact">
+              <Button variant="hero" size="xl" className="group">
+                Schedule Free Consultation
+                <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
+              </Button>
+            </Link>
+          </div>
         </div>
       </div>
 
