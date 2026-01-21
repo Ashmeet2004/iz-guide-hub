@@ -31,7 +31,7 @@ const Footer = () => {
   return (
     <footer className="relative">
       {/* CTA Section - Light Background with City Pattern */}
-      <div className="bg-background py-16">
+      <div className="bg-background py-16 -mb-[90px] relative z-20">
         <div className="container mx-auto px-4">
           <div 
             className="relative rounded-2xl overflow-hidden"
@@ -39,25 +39,6 @@ const Footer = () => {
               background: 'linear-gradient(135deg, hsl(204 71% 97%) 0%, hsl(204 50% 95%) 50%, hsl(204 71% 97%) 100%)'
             }}
           >
-            {/* City Skyline Pattern - Left Side */}
-            <div 
-              className="absolute left-0 bottom-0 w-1/3 h-full opacity-[0.08] pointer-events-none"
-              style={{
-                backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect x='20' y='100' width='40' height='200' fill='%23185888'/%3E%3Crect x='70' y='60' width='50' height='240' fill='%23185888'/%3E%3Crect x='130' y='120' width='35' height='180' fill='%23185888'/%3E%3Crect x='175' y='80' width='45' height='220' fill='%23185888'/%3E%3Crect x='230' y='140' width='30' height='160' fill='%23185888'/%3E%3Crect x='270' y='90' width='55' height='210' fill='%23185888'/%3E%3Crect x='335' y='110' width='40' height='190' fill='%23185888'/%3E%3C/svg%3E")`,
-                backgroundRepeat: 'no-repeat',
-                backgroundPosition: 'left bottom',
-                backgroundSize: 'contain'
-              }}
-            />
-            
-            {/* Dot Pattern - Right Side */}
-            <div 
-              className="absolute right-0 top-0 w-1/3 h-full opacity-[0.04] pointer-events-none"
-              style={{
-                backgroundImage: `radial-gradient(circle at 2px 2px, hsl(204 71% 31%) 1px, transparent 0)`,
-                backgroundSize: '16px 16px'
-              }}
-            />
 
             <div className="relative z-10 py-16 px-8 text-center">
               {/* Badge */}
@@ -95,7 +76,7 @@ const Footer = () => {
 
       {/* Main Footer - Dark Blue Background */}
       <div 
-        className="relative text-primary-foreground"
+        className="relative text-primary-foreground pt-[100px]"
         style={{
           background: 'linear-gradient(180deg, hsl(204 71% 25%) 0%, hsl(204 71% 20%) 100%)'
         }}
