@@ -29,19 +29,54 @@ const Footer = () => {
     <footer className="bg-gradient-hero text-primary-foreground">
       {/* CTA Section */}
       <div className="container mx-auto px-4 py-12">
-        <div className="rounded-3xl p-8 md:p-16 text-center bg-white">
-          <h2 className="font-display text-3xl md:text-4xl font-bold text-primary mb-4">
-            Ready to Start Your Business Journey?
-          </h2>
-          <p className="text-success mb-8 max-w-2xl mx-auto text-lg font-medium">
-            Get expert guidance for all your business registration, tax, and compliance needs. 
-            Schedule a free consultation with our experienced chartered accountants.
-          </p>
-          <Link to="/contact">
-            <Button variant="accent" size="lg">
-              Schedule Free Consultation
-            </Button>
-          </Link>
+        <div className="relative rounded-3xl p-10 md:p-16 text-center bg-white shadow-xl overflow-hidden">
+          {/* Decorative corner accents */}
+          <div className="absolute top-0 left-0 w-24 h-24 border-t-4 border-l-4 border-primary/20 rounded-tl-3xl" />
+          <div className="absolute bottom-0 right-0 w-24 h-24 border-b-4 border-r-4 border-accent/20 rounded-br-3xl" />
+          
+          {/* Subtle pattern background */}
+          <div className="absolute inset-0 opacity-[0.03]" style={{
+            backgroundImage: `radial-gradient(circle at 1px 1px, hsl(var(--primary)) 1px, transparent 0)`,
+            backgroundSize: '24px 24px'
+          }} />
+          
+          <div className="relative z-10">
+            <div className="inline-flex items-center gap-2 bg-success/10 text-success px-4 py-2 rounded-full text-sm font-semibold mb-6">
+              <span className="w-2 h-2 bg-success rounded-full animate-pulse" />
+              Free Consultation Available
+            </div>
+            
+            <h2 className="font-display text-3xl md:text-5xl font-bold text-primary mb-4">
+              Ready to Start Your Business Journey?
+            </h2>
+            
+            <p className="text-success mb-10 max-w-2xl mx-auto text-lg font-medium leading-relaxed">
+              Get expert guidance for all your business registration, tax, and compliance needs. 
+              Schedule a free consultation with our experienced chartered accountants.
+            </p>
+            
+            <Link to="/contact">
+              <Button variant="accent" size="lg" className="shadow-lg shadow-accent/30 hover:shadow-accent/50 transition-all duration-300 px-8">
+                Schedule Free Consultation
+              </Button>
+            </Link>
+            
+            {/* Trust badges */}
+            <div className="mt-10 pt-8 border-t border-border flex flex-wrap justify-center gap-8 text-muted-foreground text-sm">
+              <div className="flex items-center gap-2">
+                <span className="text-success font-bold">✓</span>
+                15+ Years Experience
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-success font-bold">✓</span>
+                10,000+ Happy Clients
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-success font-bold">✓</span>
+                100% Satisfaction
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
