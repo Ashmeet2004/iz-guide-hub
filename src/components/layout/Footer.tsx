@@ -29,32 +29,19 @@ const Footer = () => {
     <footer className="bg-gradient-hero text-primary-foreground">
       {/* CTA Section */}
       <div className="container mx-auto px-4 py-12">
-        <div 
-          className="relative rounded-3xl p-8 md:p-16 text-center overflow-hidden"
-          style={{
-            backgroundImage: `url(${ctaBackground})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center'
-          }}
-        >
-          {/* Overlay */}
-          <div className="absolute inset-0 bg-primary/80 rounded-3xl" />
-          
-          {/* Content */}
-          <div className="relative z-10">
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-primary-foreground mb-4">
-              Ready to Start Your Business Journey?
-            </h2>
-            <p className="text-primary-foreground/80 mb-8 max-w-2xl mx-auto text-lg">
-              Get expert guidance for all your business registration, tax, and compliance needs. 
-              Schedule a free consultation with our experienced chartered accountants.
-            </p>
-            <Link to="/contact">
-              <Button variant="accent" size="lg">
-                Schedule Free Consultation
-              </Button>
-            </Link>
-          </div>
+        <div className="rounded-3xl p-8 md:p-16 text-center bg-white">
+          <h2 className="font-display text-3xl md:text-4xl font-bold text-primary mb-4">
+            Ready to Start Your Business Journey?
+          </h2>
+          <p className="text-success mb-8 max-w-2xl mx-auto text-lg font-medium">
+            Get expert guidance for all your business registration, tax, and compliance needs. 
+            Schedule a free consultation with our experienced chartered accountants.
+          </p>
+          <Link to="/contact">
+            <Button variant="accent" size="lg">
+              Schedule Free Consultation
+            </Button>
+          </Link>
         </div>
       </div>
 
