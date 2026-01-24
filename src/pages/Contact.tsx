@@ -8,7 +8,8 @@ import {
   Send,
   CheckCircle2,
   MessageSquare,
-  Headphones
+  Headphones,
+  PhoneCall
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -16,6 +17,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import Layout from "@/components/layout/Layout";
+import PageHero from "@/components/shared/PageHero";
+import SectionHeading from "@/components/home/SectionHeading";
+import contactHeroImg from "@/assets/heroes/contact-hero.jpg";
 
 const contactInfo = [
   {
@@ -70,7 +74,6 @@ const Contact = () => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate form submission
     await new Promise(resolve => setTimeout(resolve, 1500));
     
     toast({
@@ -91,59 +94,43 @@ const Contact = () => {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-hero text-primary-foreground overflow-hidden">
-        <div className="absolute inset-0 pattern-dots opacity-10" />
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-3xl mx-auto text-center">
-            <motion.span
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="inline-block px-4 py-2 bg-accent/20 text-accent rounded-full text-sm font-semibold mb-6"
-            >
-              Contact Us
-            </motion.span>
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="font-display text-4xl md:text-5xl font-bold mb-6"
-            >
-              Get in Touch With Our Experts
-            </motion.h1>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="text-xl text-primary-foreground/80"
-            >
-              Have questions? We're here to help. Reach out to us for 
-              a free consultation about your business needs.
-            </motion.p>
-          </div>
-        </div>
-      </section>
+      <PageHero
+        badge="Contact Us"
+        badgeIcon={PhoneCall}
+        title="Get in Touch With Our"
+        highlightedTitle="Experts"
+        description="Have questions? We're here to help. Reach out to us for a free consultation about your business needs."
+        backgroundImage={contactHeroImg}
+      />
 
       {/* Contact Info Cards */}
-      <section className="py-12 bg-card relative -mt-12 z-10">
+      <section className="py-16 bg-card relative -mt-12 z-10">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {contactInfo.map((info, index) => (
               <motion.a
                 key={index}
                 href={info.link}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="p-6 rounded-2xl bg-background shadow-card hover:shadow-xl transition-all group"
+                className="group"
               >
-                <div className="inline-flex p-3 rounded-xl bg-gradient-primary text-primary-foreground mb-4 group-hover:scale-110 transition-transform">
-                  <info.icon className="h-6 w-6" />
+                <div className="relative h-full p-6 rounded-2xl bg-background border border-border/30 shadow-card overflow-hidden transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 hover:border-accent/30">
+                  {/* Decorative corner */}
+                  <div className="absolute top-0 right-0 w-16 h-16 bg-gradient-to-bl from-primary/10 via-transparent to-transparent rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity" />
+                  
+                  <div className="inline-flex p-4 rounded-2xl bg-gradient-to-br from-primary to-primary/80 text-white mb-4 shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all">
+                    <info.icon className="h-6 w-6" />
+                  </div>
+                  <h3 className="font-semibold text-foreground mb-1">{info.title}</h3>
+                  <p className="text-accent font-medium">{info.value}</p>
+                  <p className="text-sm text-muted-foreground">{info.subValue}</p>
+                  
+                  {/* Bottom accent */}
+                  <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-accent to-success transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
                 </div>
-                <h3 className="font-semibold text-foreground mb-1">{info.title}</h3>
-                <p className="text-accent font-medium">{info.value}</p>
-                <p className="text-sm text-muted-foreground">{info.subValue}</p>
               </motion.a>
             ))}
           </div>
@@ -151,8 +138,10 @@ const Contact = () => {
       </section>
 
       {/* Contact Form & Map */}
-      <section className="py-20 bg-background">
-        <div className="container mx-auto px-4">
+      <section className="py-24 bg-background relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-[150px]" />
+        
+        <div className="container mx-auto px-4 relative z-10">
           <div className="grid lg:grid-cols-2 gap-16">
             {/* Contact Form */}
             <motion.div
@@ -162,10 +151,13 @@ const Contact = () => {
               viewport={{ once: true }}
             >
               <div className="mb-8">
-                <h2 className="font-display text-3xl font-bold text-foreground mb-4">
-                  Send Us a Message
-                </h2>
-                <p className="text-muted-foreground">
+                <SectionHeading
+                  badge="Send Message"
+                  title="Drop Us a"
+                  highlight="Line"
+                  centered={false}
+                />
+                <p className="text-muted-foreground -mt-10">
                   Fill out the form below and our team will get back to you within 24 hours.
                 </p>
               </div>
@@ -173,7 +165,7 @@ const Contact = () => {
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <Label htmlFor="name">Full Name *</Label>
+                    <Label htmlFor="name" className="text-foreground font-medium">Full Name *</Label>
                     <Input
                       id="name"
                       name="name"
@@ -181,11 +173,11 @@ const Contact = () => {
                       value={formData.name}
                       onChange={handleChange}
                       required
-                      className="h-12"
+                      className="h-12 bg-card border-border/50 focus:border-primary"
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="email">Email Address *</Label>
+                    <Label htmlFor="email" className="text-foreground font-medium">Email Address *</Label>
                     <Input
                       id="email"
                       name="email"
@@ -194,14 +186,14 @@ const Contact = () => {
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className="h-12"
+                      className="h-12 bg-card border-border/50 focus:border-primary"
                     />
                   </div>
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <Label htmlFor="phone">Phone Number *</Label>
+                    <Label htmlFor="phone" className="text-foreground font-medium">Phone Number *</Label>
                     <Input
                       id="phone"
                       name="phone"
@@ -210,17 +202,17 @@ const Contact = () => {
                       value={formData.phone}
                       onChange={handleChange}
                       required
-                      className="h-12"
+                      className="h-12 bg-card border-border/50 focus:border-primary"
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="service">Service Required</Label>
+                    <Label htmlFor="service" className="text-foreground font-medium">Service Required</Label>
                     <select
                       id="service"
                       name="service"
                       value={formData.service}
                       onChange={handleChange}
-                      className="w-full h-12 px-4 rounded-lg border border-input bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+                      className="w-full h-12 px-4 rounded-lg border border-border/50 bg-card text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
                     >
                       <option value="">Select a service</option>
                       <option value="company-registration">Company Registration</option>
@@ -235,7 +227,7 @@ const Contact = () => {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="message">Message *</Label>
+                  <Label htmlFor="message" className="text-foreground font-medium">Message *</Label>
                   <Textarea
                     id="message"
                     name="message"
@@ -244,6 +236,7 @@ const Contact = () => {
                     onChange={handleChange}
                     required
                     rows={5}
+                    className="bg-card border-border/50 focus:border-primary resize-none"
                   />
                 </div>
 
@@ -251,7 +244,7 @@ const Contact = () => {
                   type="submit" 
                   variant="accent" 
                   size="lg" 
-                  className="w-full md:w-auto"
+                  className="w-full md:w-auto shadow-lg shadow-accent/20 group"
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? (
@@ -259,7 +252,7 @@ const Contact = () => {
                   ) : (
                     <>
                       Send Message
-                      <Send className="h-4 w-4 ml-2" />
+                      <Send className="h-4 w-4 ml-2 group-hover:translate-x-1 transition-transform" />
                     </>
                   )}
                 </Button>
@@ -275,7 +268,7 @@ const Contact = () => {
               className="space-y-8"
             >
               {/* Map */}
-              <div className="rounded-2xl overflow-hidden shadow-xl h-[300px] bg-secondary">
+              <div className="rounded-3xl overflow-hidden shadow-2xl h-[300px] bg-secondary border border-border/30">
                 <iframe
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3501.8347632873093!2d77.21280531508299!3d28.63299998241693!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cfd37b741d057%3A0xcdee88e47393c3f1!2sConnaught%20Place%2C%20New%20Delhi%2C%20Delhi!5e0!3m2!1sen!2sin!4v1635000000000!5m2!1sen!2sin"
                   width="100%"
@@ -288,16 +281,16 @@ const Contact = () => {
               </div>
 
               {/* Quick Contact Options */}
-              <div className="p-8 rounded-2xl bg-card shadow-card">
+              <div className="p-8 rounded-3xl bg-card border border-border/30 shadow-card">
                 <h3 className="font-display text-xl font-bold text-foreground mb-6">
                   Quick Contact Options
                 </h3>
                 <div className="space-y-4">
                   <a 
                     href="tel:+919876543210"
-                    className="flex items-center gap-4 p-4 rounded-xl bg-secondary hover:bg-secondary/80 transition-colors"
+                    className="group flex items-center gap-4 p-4 rounded-2xl bg-secondary/50 hover:bg-secondary transition-all hover:-translate-y-1"
                   >
-                    <div className="p-3 rounded-lg bg-gradient-primary text-primary-foreground">
+                    <div className="p-3 rounded-xl bg-gradient-to-br from-primary to-primary/80 text-white shadow-md group-hover:scale-110 transition-transform">
                       <Headphones className="h-6 w-6" />
                     </div>
                     <div>
@@ -309,9 +302,9 @@ const Contact = () => {
                     href="https://wa.me/919876543210"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-4 p-4 rounded-xl bg-secondary hover:bg-secondary/80 transition-colors"
+                    className="group flex items-center gap-4 p-4 rounded-2xl bg-secondary/50 hover:bg-secondary transition-all hover:-translate-y-1"
                   >
-                    <div className="p-3 rounded-lg bg-gradient-success text-success-foreground">
+                    <div className="p-3 rounded-xl bg-gradient-to-br from-success to-success/80 text-white shadow-md group-hover:scale-110 transition-transform">
                       <MessageSquare className="h-6 w-6" />
                     </div>
                     <div>
@@ -323,24 +316,32 @@ const Contact = () => {
               </div>
 
               {/* Why Contact Us */}
-              <div className="p-8 rounded-2xl bg-gradient-primary text-primary-foreground">
-                <h3 className="font-display text-xl font-bold mb-6">
-                  Why Consult With Us?
-                </h3>
-                <ul className="space-y-3">
-                  {[
-                    "Free initial consultation",
-                    "Expert CA guidance",
-                    "Quick response within 24 hours",
-                    "Personalized solutions",
-                    "Transparent pricing"
-                  ].map((item, index) => (
-                    <li key={index} className="flex items-center gap-3">
-                      <CheckCircle2 className="h-5 w-5 text-accent shrink-0" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
+              <div className="relative p-8 rounded-3xl overflow-hidden" style={{
+                background: 'linear-gradient(135deg, hsl(204 71% 28%) 0%, hsl(204 71% 22%) 100%)'
+              }}>
+                <div className="absolute top-0 right-0 w-32 h-32 bg-accent/20 rounded-full blur-3xl" />
+                
+                <div className="relative z-10">
+                  <h3 className="font-display text-xl font-bold text-white mb-6">
+                    Why Consult With Us?
+                  </h3>
+                  <ul className="space-y-4">
+                    {[
+                      "Free initial consultation",
+                      "Expert CA guidance",
+                      "Quick response within 24 hours",
+                      "Personalized solutions",
+                      "Transparent pricing"
+                    ].map((item, index) => (
+                      <li key={index} className="flex items-center gap-3 text-white/80">
+                        <div className="p-1 rounded-full bg-accent/20">
+                          <CheckCircle2 className="h-4 w-4 text-accent" />
+                        </div>
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             </motion.div>
           </div>
@@ -348,19 +349,13 @@ const Contact = () => {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-20 bg-card">
+      <section className="py-24 bg-card relative">
         <div className="container mx-auto px-4">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              viewport={{ once: true }}
-              className="font-display text-3xl md:text-4xl font-bold text-foreground mb-6"
-            >
-              Frequently Asked Questions
-            </motion.h2>
-          </div>
+          <SectionHeading
+            badge="FAQs"
+            title="Frequently Asked"
+            highlight="Questions"
+          />
 
           <div className="max-w-3xl mx-auto space-y-6">
             {[
@@ -387,10 +382,12 @@ const Contact = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="p-6 rounded-2xl bg-background shadow-card"
+                className="group"
               >
-                <h4 className="font-semibold text-foreground mb-2">{faq.q}</h4>
-                <p className="text-muted-foreground">{faq.a}</p>
+                <div className="p-6 rounded-2xl bg-background border border-border/30 shadow-card hover:shadow-xl transition-all hover:border-accent/30">
+                  <h4 className="font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">{faq.q}</h4>
+                  <p className="text-muted-foreground">{faq.a}</p>
+                </div>
               </motion.div>
             ))}
           </div>
