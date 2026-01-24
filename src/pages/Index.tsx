@@ -9,13 +9,22 @@ import {
   Clock,
   Shield,
   HeartHandshake,
-  Star
+  Sparkles,
+  Play
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { services } from "@/data/services";
 import Layout from "@/components/layout/Layout";
 import heroBg from "@/assets/hero-bg.jpg";
 import teamImg from "@/assets/team.jpg";
+
+// Custom components
+import AnimatedCounter from "@/components/home/AnimatedCounter";
+import ServiceCard from "@/components/home/ServiceCard";
+import TestimonialCard from "@/components/home/TestimonialCard";
+import SectionHeading from "@/components/home/SectionHeading";
+import ProcessStep from "@/components/home/ProcessStep";
+import FeatureHighlight from "@/components/home/FeatureHighlight";
 
 const stats = [
   { number: "15+", label: "Years Experience", icon: Clock },
@@ -68,14 +77,21 @@ const testimonials = [
   }
 ];
 
+const processSteps = [
+  { step: "01", title: "Share Requirements", desc: "Tell us about your business needs and goals" },
+  { step: "02", title: "Get Expert Advice", desc: "Our CA team provides personalized guidance" },
+  { step: "03", title: "Document Collection", desc: "We collect and verify necessary documents" },
+  { step: "04", title: "Task Completion", desc: "We complete the work and deliver on time" },
+];
+
 const Index = () => {
   return (
     <Layout>
-      {/* Hero Section */}
-      <section className="relative min-h-[90vh] flex items-center overflow-hidden">
-        {/* Background */}
+      {/* Hero Section - Premium Design */}
+      <section className="relative min-h-[95vh] flex items-center overflow-hidden">
+        {/* Background with overlay */}
         <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-gradient-hero opacity-90 z-10" />
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/95 via-primary/90 to-primary/85 z-10" />
           <img 
             src={heroBg} 
             alt="Professional accounting office" 
@@ -83,239 +99,232 @@ const Index = () => {
           />
         </div>
         
-        {/* Pattern Overlay */}
-        <div className="absolute inset-0 z-10 pattern-dots opacity-20" />
+        {/* Animated gradient orbs */}
+        <div className="absolute top-20 right-20 w-96 h-96 bg-accent/30 rounded-full blur-[120px] z-10" />
+        <div className="absolute bottom-20 left-20 w-80 h-80 bg-success/20 rounded-full blur-[100px] z-10" />
 
+        {/* Content */}
         <div className="container mx-auto px-4 relative z-20">
-          <div className="max-w-3xl">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              <span className="inline-block px-4 py-2 bg-accent/20 text-accent rounded-full text-sm font-semibold mb-6">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+              {/* Badge */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                className="inline-flex items-center gap-2 px-5 py-2.5 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-sm font-semibold text-white/90 mb-8"
+              >
+                <Sparkles className="h-4 w-4 text-accent" />
                 Trusted Chartered Accountants Since 2009
-              </span>
-            </motion.div>
+              </motion.div>
 
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-primary-foreground mb-6 leading-tight"
-            >
-              Your Partner for{" "}
-              <span className="text-accent">Business Growth</span> &{" "}
-              <span className="text-success">Financial Success</span>
-            </motion.h1>
+              {/* Heading */}
+              <motion.h1
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                className="font-display text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-8 leading-[1.1]"
+              >
+                Your Partner for{" "}
+                <span className="relative inline-block">
+                  <span className="relative z-10 text-accent">Business Growth</span>
+                  <motion.span 
+                    initial={{ scaleX: 0 }}
+                    animate={{ scaleX: 1 }}
+                    transition={{ duration: 0.8, delay: 0.5 }}
+                    className="absolute bottom-2 left-0 right-0 h-3 bg-accent/30 -z-0 origin-left"
+                  />
+                </span>
+                {" "}& <span className="text-success">Financial Success</span>
+              </motion.h1>
 
-            <motion.p
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-lg md:text-xl text-primary-foreground/80 mb-8 leading-relaxed"
-            >
-              Expert guidance for company registration, GST, income tax, business licenses, 
-              and complete financial compliance. We simplify complex regulations so you can focus 
-              on building your business.
-            </motion.p>
+              {/* Description */}
+              <motion.p
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="text-lg md:text-xl text-white/70 mb-10 leading-relaxed max-w-xl"
+              >
+                Expert guidance for company registration, GST, income tax, business licenses, 
+                and complete financial compliance. We simplify complex regulations so you can focus 
+                on building your business.
+              </motion.p>
 
+              {/* CTA Buttons */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                className="flex flex-wrap gap-4 mb-12"
+              >
+                <Link to="/contact">
+                  <Button size="xl" className="group bg-accent hover:bg-accent/90 text-accent-foreground shadow-xl shadow-accent/25 border-0">
+                    Get Free Consultation
+                    <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                  </Button>
+                </Link>
+                <Link to="/services">
+                  <Button size="xl" variant="outline" className="bg-white/10 border-white/30 text-white hover:bg-white/20 hover:text-white backdrop-blur-sm">
+                    <Play className="h-4 w-4 mr-2" />
+                    Explore Services
+                  </Button>
+                </Link>
+              </motion.div>
+
+              {/* Trust indicators */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                className="flex flex-wrap items-center gap-6"
+              >
+                {[
+                  "100% Online Process",
+                  "Expert CA Team",
+                  "Quick Response"
+                ].map((feature, index) => (
+                  <div key={index} className="flex items-center gap-2 text-white/80">
+                    <div className="p-1 rounded-full bg-success/20">
+                      <CheckCircle2 className="h-4 w-4 text-success" />
+                    </div>
+                    <span className="text-sm font-medium">{feature}</span>
+                  </div>
+                ))}
+              </motion.div>
+            </div>
+
+            {/* Right side - Floating stats card */}
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="flex flex-wrap gap-4"
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="hidden lg:block"
             >
-              <Link to="/contact">
-                <Button variant="hero" size="xl" className="group">
-                  Get Free Consultation
-                  <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
-                </Button>
-              </Link>
-              <Link to="/services">
-                <Button variant="heroOutline" size="xl">
-                  Explore Services
-                </Button>
-              </Link>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="mt-12 flex flex-wrap items-center gap-8"
-            >
-              {[
-                "100% Online Process",
-                "Expert CA Team",
-                "Quick Response"
-              ].map((feature, index) => (
-                <div key={index} className="flex items-center gap-2 text-primary-foreground/80">
-                  <CheckCircle2 className="h-5 w-5 text-success" />
-                  <span>{feature}</span>
+              <div className="relative">
+                {/* Main card */}
+                <div className="relative bg-white/10 backdrop-blur-xl rounded-3xl border border-white/20 p-8 shadow-2xl">
+                  <h3 className="text-white text-xl font-semibold mb-6">Why Businesses Trust Us</h3>
+                  
+                  <div className="space-y-4">
+                    {stats.slice(0, 3).map((stat, index) => (
+                      <motion.div
+                        key={index}
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
+                        className="flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/10"
+                      >
+                        <div className="p-3 rounded-xl bg-gradient-to-br from-accent to-accent/80 text-accent-foreground">
+                          <stat.icon className="h-5 w-5" />
+                        </div>
+                        <div>
+                          <div className="text-2xl font-bold text-white">{stat.number}</div>
+                          <div className="text-sm text-white/60">{stat.label}</div>
+                        </div>
+                      </motion.div>
+                    ))}
+                  </div>
                 </div>
-              ))}
+
+                {/* Decorative elements */}
+                <div className="absolute -top-4 -right-4 w-20 h-20 bg-accent/30 rounded-full blur-2xl" />
+                <div className="absolute -bottom-6 -left-6 w-24 h-24 bg-success/20 rounded-full blur-2xl" />
+              </div>
             </motion.div>
           </div>
         </div>
 
-        {/* Decorative Elements */}
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent z-20" />
+        {/* Bottom gradient fade */}
+        <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-background via-background/50 to-transparent z-20" />
       </section>
 
-      {/* Stats Section */}
-      <section className="py-16 bg-card relative -mt-16 z-30">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+      {/* Stats Section - Enhanced */}
+      <section className="py-20 bg-background relative">
+        {/* Subtle pattern */}
+        <div className="absolute inset-0 opacity-[0.02]" style={{
+          backgroundImage: `radial-gradient(circle at 2px 2px, currentColor 1px, transparent 0)`,
+          backgroundSize: '32px 32px'
+        }} />
+        
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-8">
             {stats.map((stat, index) => (
-              <motion.div
+              <AnimatedCounter
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="text-center p-6 rounded-2xl bg-gradient-card shadow-card hover:shadow-xl transition-shadow"
-              >
-                <div className="inline-flex p-3 rounded-xl bg-gradient-primary text-primary-foreground mb-4">
-                  <stat.icon className="h-6 w-6" />
-                </div>
-                <h3 className="font-display text-3xl md:text-4xl font-bold text-primary mb-2">
-                  {stat.number}
-                </h3>
-                <p className="text-muted-foreground">{stat.label}</p>
-              </motion.div>
+                target={stat.number}
+                label={stat.label}
+                icon={stat.icon}
+                delay={index * 150}
+              />
             ))}
           </div>
         </div>
       </section>
 
-      {/* Services Section */}
-      <section className="py-20 bg-background pattern-grid">
-        <div className="container mx-auto px-4">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <motion.span
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              viewport={{ once: true }}
-              className="inline-block px-4 py-2 bg-accent/10 text-accent rounded-full text-sm font-semibold mb-4"
-            >
-              Our Services
-            </motion.span>
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              viewport={{ once: true }}
-              className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6"
-            >
-              Comprehensive Business Solutions
-            </motion.h2>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              viewport={{ once: true }}
-              className="text-muted-foreground text-lg"
-            >
-              From company registration to tax compliance, we offer end-to-end services 
-              to help your business thrive in the competitive market.
-            </motion.p>
-          </div>
+      {/* Services Section - Premium Grid */}
+      <section className="py-24 bg-secondary/30 relative overflow-hidden">
+        {/* Decorative gradient */}
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-[150px]" />
+        <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-accent/5 rounded-full blur-[120px]" />
+        
+        <div className="container mx-auto px-4 relative z-10">
+          <SectionHeading
+            badge="Our Services"
+            title="Comprehensive Business"
+            highlight="Solutions"
+            description="From company registration to tax compliance, we offer end-to-end services to help your business thrive in the competitive market."
+          />
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service, index) => (
-              <motion.div
+              <ServiceCard
                 key={service.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-              >
-                <Link
-                  to={`/services/${service.slug}`}
-                  className="group block h-full"
-                >
-                  <div className="h-full p-8 rounded-2xl bg-card shadow-card hover:shadow-xl transition-all duration-300 border border-transparent hover:border-accent/20 hover:-translate-y-2">
-                    <div className="inline-flex p-4 rounded-xl bg-gradient-primary text-primary-foreground mb-6 group-hover:scale-110 transition-transform">
-                      <service.icon className="h-8 w-8" />
-                    </div>
-                    <h3 className="font-display text-xl font-bold text-foreground mb-3 group-hover:text-accent transition-colors">
-                      {service.name}
-                    </h3>
-                    <p className="text-muted-foreground mb-6 line-clamp-3">
-                      {service.description}
-                    </p>
-                    <div className="flex flex-wrap gap-2 mb-6">
-                      {service.subServices.slice(0, 3).map((sub, i) => (
-                        <span 
-                          key={i}
-                          className="px-3 py-1 bg-secondary rounded-full text-xs text-secondary-foreground"
-                        >
-                          {sub.name}
-                        </span>
-                      ))}
-                      {service.subServices.length > 3 && (
-                        <span className="px-3 py-1 bg-accent/10 rounded-full text-xs text-accent">
-                          +{service.subServices.length - 3} more
-                        </span>
-                      )}
-                    </div>
-                    <div className="flex items-center text-accent font-semibold">
-                      Learn More
-                      <ArrowRight className="h-4 w-4 ml-2 group-hover:translate-x-2 transition-transform" />
-                    </div>
-                  </div>
-                </Link>
-              </motion.div>
+                id={service.id}
+                slug={service.slug}
+                name={service.name}
+                description={service.description}
+                icon={service.icon}
+                subServices={service.subServices}
+                index={index}
+              />
             ))}
           </div>
         </div>
       </section>
 
-      {/* Why Choose Us Section */}
-      <section className="py-20 bg-card">
+      {/* Why Choose Us Section - Modern Split Layout */}
+      <section className="py-24 bg-card relative overflow-hidden">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
+            {/* Left - Content */}
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
-              <span className="inline-block px-4 py-2 bg-accent/10 text-accent rounded-full text-sm font-semibold mb-4">
-                Why Choose Us
-              </span>
-              <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-6">
-                Your Trusted Partner for Business Success
-              </h2>
-              <p className="text-muted-foreground text-lg mb-8">
-                With over 15 years of experience, we have helped thousands of businesses 
-                navigate complex regulations and achieve their financial goals.
-              </p>
+              <SectionHeading
+                badge="Why Choose Us"
+                title="Your Trusted Partner for"
+                highlight="Business Success"
+                description="With over 15 years of experience, we have helped thousands of businesses navigate complex regulations and achieve their financial goals."
+                centered={false}
+              />
 
-              <div className="grid sm:grid-cols-2 gap-6">
+              <div className="grid sm:grid-cols-2 gap-2">
                 {whyChooseUs.map((item, index) => (
-                  <motion.div
+                  <FeatureHighlight
                     key={index}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                    viewport={{ once: true }}
-                    className="flex items-start gap-4"
-                  >
-                    <div className="p-2 rounded-lg bg-gradient-accent text-accent-foreground shrink-0">
-                      <item.icon className="h-5 w-5" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-foreground mb-1">{item.title}</h4>
-                      <p className="text-sm text-muted-foreground">{item.description}</p>
-                    </div>
-                  </motion.div>
+                    icon={item.icon}
+                    title={item.title}
+                    description={item.description}
+                    index={index}
+                  />
                 ))}
               </div>
             </motion.div>
 
+            {/* Right - Image with floating elements */}
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -323,120 +332,117 @@ const Index = () => {
               viewport={{ once: true }}
               className="relative"
             >
-              <img 
-                src={teamImg} 
-                alt="Our professional team" 
-                className="rounded-2xl shadow-xl w-full"
-              />
-              <div className="absolute -bottom-6 -left-6 bg-gradient-primary text-primary-foreground p-6 rounded-2xl shadow-xl">
-                <div className="text-3xl font-bold mb-1">15+</div>
-                <div className="text-sm opacity-80">Years of Excellence</div>
+              {/* Main image */}
+              <div className="relative rounded-3xl overflow-hidden shadow-2xl">
+                <img 
+                  src={teamImg} 
+                  alt="Our professional team" 
+                  className="w-full h-auto"
+                />
+                {/* Gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-primary/40 via-transparent to-transparent" />
               </div>
+
+              {/* Floating badge - Years */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+                viewport={{ once: true }}
+                className="absolute -bottom-6 -left-6 bg-gradient-to-br from-primary to-primary/90 text-white p-6 rounded-2xl shadow-xl"
+              >
+                <div className="text-4xl font-bold mb-1">15+</div>
+                <div className="text-sm text-white/80">Years of Excellence</div>
+              </motion.div>
+
+              {/* Floating badge - Clients */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5, delay: 0.4 }}
+                viewport={{ once: true }}
+                className="absolute -top-4 -right-4 bg-white dark:bg-card p-5 rounded-2xl shadow-xl border border-border/50"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="p-2 rounded-xl bg-success/10">
+                    <Users className="h-6 w-6 text-success" />
+                  </div>
+                  <div>
+                    <div className="text-2xl font-bold text-foreground">5000+</div>
+                    <div className="text-xs text-muted-foreground">Happy Clients</div>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Decorative elements */}
+              <div className="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-accent/10 rounded-full blur-[80px]" />
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Testimonials Section */}
-      <section className="py-20 bg-background">
-        <div className="container mx-auto px-4">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <motion.span
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              viewport={{ once: true }}
-              className="inline-block px-4 py-2 bg-accent/10 text-accent rounded-full text-sm font-semibold mb-4"
-            >
-              Testimonials
-            </motion.span>
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              viewport={{ once: true }}
-              className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6"
-            >
-              What Our Clients Say
-            </motion.h2>
-          </div>
+      {/* Testimonials Section - Premium Cards */}
+      <section className="py-24 bg-background relative overflow-hidden">
+        {/* Background decoration */}
+        <div className="absolute top-20 right-0 w-72 h-72 bg-primary/5 rounded-full blur-[100px]" />
+        <div className="absolute bottom-20 left-0 w-64 h-64 bg-accent/5 rounded-full blur-[80px]" />
+        
+        <div className="container mx-auto px-4 relative z-10">
+          <SectionHeading
+            badge="Testimonials"
+            title="What Our Clients"
+            highlight="Say"
+            description="Don't just take our word for it - hear from our satisfied clients who have experienced our exceptional service."
+          />
 
           <div className="grid md:grid-cols-3 gap-8">
             {testimonials.map((testimonial, index) => (
-              <motion.div
+              <TestimonialCard
                 key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="p-8 rounded-2xl bg-card shadow-card"
-              >
-                <div className="flex gap-1 mb-4">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="h-5 w-5 fill-accent text-accent" />
-                  ))}
-                </div>
-                <p className="text-muted-foreground mb-6 italic">
-                  "{testimonial.content}"
-                </p>
-                <div>
-                  <h4 className="font-semibold text-foreground">{testimonial.name}</h4>
-                  <p className="text-sm text-accent">{testimonial.company}</p>
-                </div>
-              </motion.div>
+                name={testimonial.name}
+                company={testimonial.company}
+                content={testimonial.content}
+                rating={testimonial.rating}
+                index={index}
+              />
             ))}
           </div>
         </div>
       </section>
 
-      {/* Process Section */}
-      <section className="py-20 bg-gradient-hero text-primary-foreground">
-        <div className="container mx-auto px-4">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              viewport={{ once: true }}
-              className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mb-6"
-            >
-              How It Works
-            </motion.h2>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              viewport={{ once: true }}
-              className="text-primary-foreground/80 text-lg"
-            >
-              Simple and transparent process to get your work done
-            </motion.p>
-          </div>
+      {/* Process Section - Premium Dark Design */}
+      <section className="py-24 relative overflow-hidden" style={{
+        background: 'linear-gradient(135deg, hsl(204 71% 22%) 0%, hsl(204 71% 18%) 50%, hsl(204 71% 15%) 100%)'
+      }}>
+        {/* Decorative orbs */}
+        <div className="absolute top-10 left-10 w-64 h-64 bg-accent/20 rounded-full blur-[100px]" />
+        <div className="absolute bottom-10 right-10 w-80 h-80 bg-primary/30 rounded-full blur-[120px]" />
+        
+        {/* Subtle grid pattern */}
+        <div className="absolute inset-0 opacity-[0.03]" style={{
+          backgroundImage: `linear-gradient(to right, white 1px, transparent 1px), linear-gradient(to bottom, white 1px, transparent 1px)`,
+          backgroundSize: '40px 40px'
+        }} />
 
-          <div className="grid md:grid-cols-4 gap-8">
-            {[
-              { step: "01", title: "Share Requirements", desc: "Tell us about your business needs and goals" },
-              { step: "02", title: "Get Expert Advice", desc: "Our CA team provides personalized guidance" },
-              { step: "03", title: "Document Collection", desc: "We collect and verify necessary documents" },
-              { step: "04", title: "Task Completion", desc: "We complete the work and deliver on time" },
-            ].map((item, index) => (
-              <motion.div
+        <div className="container mx-auto px-4 relative z-10">
+          <SectionHeading
+            badge="Our Process"
+            title="How It"
+            highlight="Works"
+            description="Simple and transparent process to get your work done efficiently"
+            light
+          />
+
+          <div className="grid md:grid-cols-4 gap-8 lg:gap-12">
+            {processSteps.map((item, index) => (
+              <ProcessStep
                 key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="text-center relative"
-              >
-                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-accent text-accent-foreground text-2xl font-bold mb-6">
-                  {item.step}
-                </div>
-                <h3 className="font-display text-xl font-semibold mb-3">{item.title}</h3>
-                <p className="text-primary-foreground/70">{item.desc}</p>
-                {index < 3 && (
-                  <div className="hidden md:block absolute top-8 left-[60%] w-[80%] h-0.5 bg-primary-foreground/20" />
-                )}
-              </motion.div>
+                step={item.step}
+                title={item.title}
+                description={item.desc}
+                index={index}
+                isLast={index === processSteps.length - 1}
+              />
             ))}
           </div>
         </div>
